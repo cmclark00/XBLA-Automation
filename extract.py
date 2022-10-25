@@ -63,7 +63,7 @@ for filename in DirectoryList:
     dst = FileName[:-1]
     os.rename(os.path.join(path, src), os.path.join(path, dst))
 
-input("Press enter after you have ran wxPirs on the innermost file and closed wxPirs")
+input("Press enter after you have ran wxPirs on the innermost file of " + FileName + " and closed wxPirs")
 
 for filename in DirectoryList:
     path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
