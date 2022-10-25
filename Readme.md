@@ -8,6 +8,8 @@ Download the zipped project file and extract all of its contents to your home di
 In Windows this is usually C:\Users\username.
 In Linux this is usually /home/username.
 
+Delete the text files name delete me from both the XBLA and XBla_Unpacked folders.
+
 Place all of your archived XBLA games in the XBLA folder.
 If the archive name doesn't match the title of the game then fix that now.
 
