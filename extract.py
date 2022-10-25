@@ -62,3 +62,12 @@ for filename in DirectoryList:
     src = filename
     dst = FileName[:-1]
     os.rename(os.path.join(path, src), os.path.join(path, dst))
+
+input("Press enter after you have ran wxPirs on the innermost file.")
+
+for filename in DirectoryList:
+    path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
+    filename = "default.xex"
+    src = filename
+    dst = FileName[:-1] + ".xex"
+    os.rename(os.path.join(path, src), os.path.join(path, dst))
