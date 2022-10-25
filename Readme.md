@@ -1,14 +1,22 @@
 Instructions for use:
-Place all files/folders in your home  directory
 
-In Windows this is typically C:\Users\username
-On Linux this is typically /home/username/
+Make sure you have the newest version of python installed.
 
-remove the .readme files from XBLA and XBLA_Unpacked
+In the comand line install patool using "pip install patool".
 
-place an XBLA rar archive in the XBLA folder and run the extract.py script. (Note, if the archive is not the name of the game then change it before running the script.)
+Download the zipped project file and extract all of its contents to your home directory.
+In Windows this is usually C:\Users\username.
+In Linux this is usually /home/username.
 
-When wxPirs launches, click the fodler icon, navigate to the innermost folder in XBLA_Unpacked, and select the only file there. Then click the disk icon/extract and leave it defaulting to the innermost subdirectory.
-Once that is done close wxPirs and hit enter inside your terminal
+Place all of your archived XBLA games in the XBLA folder.
+If the archive name doesn't match the title of the game then fix that now.
 
-You should now have an unarchived folder with the same name in the XBLA_Unpacked directory. inside that folder should be all of the extracted XBLA files including the newly named .xex that is needed to run the game.
+Open a command line in your home directory and run "python extract.py"
+
+Keep an eye on the terminal, eventually it will ask you to hit enter to launch wxPirs.
+Select the innermost file in the game directory by clicking the open button and navigating to it, then click the save/extract button.
+Once it is done extracting all of the files close wxPirs and then hit enter in the command line window.
+
+Repeat the last step until you have gone through all of your archives. You will know the program has ended when it shows your home directory as the final location in the terminal.
+
+Special note for Linux users, you will have to use wine to run wxPirs. Once you set that up it should run fine.
