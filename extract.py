@@ -3,6 +3,7 @@ from ast import Str
 from fileinput import filename
 import os
 import os.path
+from subprocess import run
 import patoolib
 # Changes ~ to /home/usernam
 HomePath = os.path.expanduser('~')
@@ -60,8 +61,9 @@ for filename in DirectoryList:
     src = filename
     dst = FileName[:-1]
     os.rename(os.path.join(path, src), os.path.join(path, dst))
-#This tells the user to ru wxPirs on the correct file and then close wxPirs and press enter
-input("Press enter after you have ran wxPirs on the innermost file of " + FileName + " and closed wxPirs")
+#This launches wxPirs and tells the user to run it on the correct file then close it
+run("wxpirs.exe")
+input("Press enter after you have used wxPirs on the innermost file of " + FileName + " and closed wxPirs")
 
 #This renames default.xex to the correct FileName.xex
 for filename in DirectoryList:
