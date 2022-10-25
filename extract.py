@@ -3,7 +3,6 @@ from ast import Str
 from fileinput import filename
 import os
 import os.path
-import pip
 import patoolib
 # Changes ~ to /home/usernam
 HomePath = os.path.expanduser('~')
@@ -42,7 +41,6 @@ FileName = (str(FileName).replace('[', '').replace(']', '').replace("'", ''))
 # This sets FileName to correct name with a / for the path and then grabs the next directory name
 FileName = FileName + '/'
 DirectoryList = os.listdir(HomePath + UnpackedPath + FileName + FileName)
-print(DirectoryList)
 
 # This changes the 2nd subdirectory to the correct name
 for filename in DirectoryList:
@@ -54,7 +52,7 @@ for filename in DirectoryList:
 # This grabs the next directory name
 DirectoryList = os.listdir(HomePath + UnpackedPath +
                            FileName + FileName + FileName)
-print(DirectoryList)
+
 
 # This changes the 3rd subdirectory to the correct name
 for filename in DirectoryList:
@@ -62,9 +60,10 @@ for filename in DirectoryList:
     src = filename
     dst = FileName[:-1]
     os.rename(os.path.join(path, src), os.path.join(path, dst))
-
+#This tells the user to ru wxPirs on the correct file and then close wxPirs and press enter
 input("Press enter after you have ran wxPirs on the innermost file of " + FileName + " and closed wxPirs")
 
+#This renames default.xex to the correct FileName.xex
 for filename in DirectoryList:
     path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
     filename = "default.xex"
@@ -72,6 +71,7 @@ for filename in DirectoryList:
     dst = FileName[:-1] + ".xex"
     os.rename(os.path.join(path, src), os.path.join(path, dst))
 
+#This gets rid of the extra folders by moving everything to the top level directory
 source = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
 destination = HomePath + UnpackedPath + FileName
 AllFiles = os.listdir(source)
