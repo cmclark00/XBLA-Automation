@@ -63,7 +63,7 @@ for filename in DirectoryList:
     dst = FileName[:-1]
     os.rename(os.path.join(path, src), os.path.join(path, dst))
 
-input("Press enter after you have ran wxPirs on the innermost file.")
+input("Press enter after you have ran wxPirs on the innermost file and closed wxPirs")
 
 for filename in DirectoryList:
     path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
@@ -71,3 +71,11 @@ for filename in DirectoryList:
     src = filename
     dst = FileName[:-1] + ".xex"
     os.rename(os.path.join(path, src), os.path.join(path, dst))
+
+source = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
+destination = HomePath + UnpackedPath + FileName
+AllFiles = os.listdir(source)
+for f in AllFiles:
+    src = os.path.join(source, f)
+    dst = os.path.join(destination, f)
+    os.rename(src, dst)
