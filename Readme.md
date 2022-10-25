@@ -11,4 +11,4 @@ place an XBLA rar archive in the XBLA folder and run the extract.py script. (Not
 When wxPirs launches, click the fodler icon, navigate to the innermost folder in XBLA_Unpacked, and select the only file there. Then click the disk icon/extract and leave it defaulting to the innermost subdirectory.
 Once that is done close wxPirs and hit enter inside your terminal
 
-You should now have an unarchived folder with the same name in the XBLA_Unpacked directory. inside that folder should be all of the extracted XBLA files inclduing the newly name .xex that is needed to run the game.
+You should now have an unarchived folder with the same name in the XBLA_Unpacked directory. inside that folder should be all of the extracted XBLA files including the newly named .xex that is needed to run the game.
