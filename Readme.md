@@ -1,6 +1,10 @@
 # XBLA-Automation 0.2b
 
-## The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
+## Purpose:
+# The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
+
+## Why it's necessary:
+# Due to the way that XBLA games are packaged ES-DE can't normally recognize the games as being in your Roms/xbox 360 folder. This is because XBLA games are packaged in a pirs file which is only used for the xbox 360, and which have no file extension, which ES-DE uses to recognize the game files. It is possible to do all of the work this script does by hand, it's just a little tedious. program
 
 ### How it works:
 The way the script works is by calling the patoolib module to extract the archives from the XBLA folder to the XBLA_Unpacked folder.
@@ -33,12 +37,12 @@ Open a command line in your home directory and run "python extract.py"
 Keep an eye on the terminal, eventually it will ask you to hit enter to launch wxPirs.
 Select the innermost file in the game directory in XBLA_Unpacked by clicking the open button and navigating to it, then click the save/extract button.
 Once it is done extracting all of the files close wxPirs and then hit enter in the command line window.
-## Very important: Do not hit enter for the second time until after you have closed wxPirs. If wxPirs is still open when you hit enter for the second time the program will crash .
+## Very important: Do not hit enter for the second time until after you have closed wxPirs. If wxPirs is still open when you hit enter for the second time the script will crash .
 
-Repeat the last step until you have gone through all of your archives. You will know the program has ended when it shows your home directory as the final location in the terminal.
+Repeat the last step until you have gone through all of your archives. You will know the script has ended when it shows your home directory as the final location in the terminal.
 
 Now you can move all of the game folders over to your Roms/xbox 360 folder in your EmulationStation DE setup and run the scraper.
 
-### If you need to run the program again make sure the XBLA_Unpacked folder is empty. If it isn't empty the program will crash.
+### If you need to run the script again make sure the XBLA_Unpacked folder is empty. If it isn't empty the script will crash.
 
 Special note for Linux users, you will have to use wine to run wxPirs. Once you set that up it should run fine.
