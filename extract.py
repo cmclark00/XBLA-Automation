@@ -68,9 +68,6 @@ for i in range(len(AllDirs)):
           FileName[:-1] + " and close wxPirs")
     run("wxpirs.exe")
 
-    input("Press enter after you have used wxPirs on the innermost file of " +
-          FileName[:-1] + " and closed wxPirs")
-
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
         path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
