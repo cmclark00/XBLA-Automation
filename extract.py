@@ -65,13 +65,9 @@ for i in range(len(AllDirs)):
         os.rename(os.path.join(path, src), os.path.join(path, dst))
 # This launches wxPirs and tells the user to run it on the correct file then close it
     input("Press Enter to launch wxPirs. Once launched, select the innermost file of " +
-<<<<<<< HEAD
           FileName[:-1] + " and close wxPirs")
     run("wxpirs.exe")
-=======
-          FileName + " and close wxPirs")
-    run(HomePath + "/wxPirs.exe")
->>>>>>> 735e451d4bb1b631cf108587e5bcf03b79899035
+
     input("Press enter after you have used wxPirs on the innermost file of " +
           FileName[:-1] + " and closed wxPirs")
 
