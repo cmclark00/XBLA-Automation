@@ -1,8 +1,10 @@
 
 from ast import Str
 from fileinput import filename
+from logging import shutdown
 import os
 import os.path
+import shutil
 from subprocess import run
 import patoolib
 # Changes ~ to /home/usernam
@@ -13,38 +15,42 @@ AllDirs = os.listdir(HomePath + '/XBLA/')
 for i in range(len(AllDirs)):
     FileName = AllDirs[i].replace('[', '').replace(']', '').replace("'", '')
 # This should check if there is already the same named directory in XBLA_Unpacked folder and if not will create it
+   
     MyDir = (FileName)
-    Check_Folder = os.path.isdir(str(HomePath + UnpackedPath + FileName))
+    Check_Folder = os.path.isdir(str(HomePath + UnpackedPath + MyDir))
 
     if not Check_Folder:
 
         os.makedirs(str(HomePath + UnpackedPath + MyDir))
-        print("Created Folder : ", FileName)
+        print("Created Folder : ", MyDir)
 
     else:
-        print(FileName, "Folder already exists.")
+        print(MyDir, "Folder already exists.")
 # This extracts the rar in the XBLA folder to XBLA_Unpacked
     patoolib.extract_archive(HomePath + "/XBLA/" + (FileName),
                              outdir=HomePath + "/XBLA_Unpacked/" + (FileName))
 
 # This changes the top level directory to removethe .rar from folder name
-    DirectoryList = os.listdir(HomePath + UnpackedPath)
+    try:
+        DirectoryList = os.listdir(HomePath + UnpackedPath)
 
-    for filename in DirectoryList:
-        src = filename
-        filename = filename.replace('.rar', '')
-        dst = filename
-        path = HomePath + UnpackedPath
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-        FileName = dst
+        for filename in DirectoryList:
+            src = filename
+            filename = filename.replace('.rar', '')
+            dst = filename
+            path = HomePath + UnpackedPath
+            os.rename(os.path.join(path, src), os.path.join(path, dst))
+            FileName = dst
 # This grabs the new correct name and set FileName to that
-    FileName = (str(FileName).replace(
-        '[', '').replace(']', '').replace("'", ''))
+        FileName = (str(FileName).replace(
+            '[', '').replace(']', '').replace("'", ''))
 
 # This sets FileName to correct name with a / for the path and then grabs the next directory name
-    FileName = FileName + '/'
-    DirectoryList = os.listdir(HomePath + UnpackedPath + FileName + FileName)
-
+        FileName = FileName + '/'
+        DirectoryList = os.listdir(HomePath + UnpackedPath + FileName + FileName)
+    except FileExistsError:
+       quit("The file " + FileName + " already exists. Please remove it and try again.")
+        
 # This changes the 2nd subdirectory to the correct name
     for filename in DirectoryList:
         path = HomePath + UnpackedPath + FileName + FileName
@@ -85,4 +91,7 @@ for i in range(len(AllDirs)):
             dst = os.path.join(destination, f)
             os.rename(src, dst)
 
+        shutil.rmtree(source)
+        shutil.rmtree(HomePath + UnpackedPath + FileName + FileName + FileName)
+        shutil.rmtree(HomePath + UnpackedPath + FileName + FileName)
         i = i + 1
