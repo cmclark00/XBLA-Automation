@@ -10,8 +10,12 @@ import patoolib
 # Changes ~ to /home/usernam
 HomePath = os.path.expanduser('~')
 UnpackedPath = ('/XBLA_Unpacked/')
+FileName = ""
 # this sets FileName to the name of the file in /home/username/XBLA as a string and removes the [] and ''
 AllDirs = os.listdir(HomePath + '/XBLA/')
+
+
+
 for i in range(len(AllDirs)):
     FileName = AllDirs[i].replace('[', '').replace(']', '').replace("'", '')
 # This should check if there is already the same named directory in XBLA_Unpacked folder and if not will create it
@@ -90,8 +94,21 @@ for i in range(len(AllDirs)):
             src = os.path.join(source, f)
             dst = os.path.join(destination, f)
             os.rename(src, dst)
+        if i == len(AllDirs) - 1:
+            Delete = input("Would you like the original Rar files to be deleted? Enter Y for yes, or N for no: ")
+            if Delete == "Y":
+                shutil.rmtree(HomePath + "/XBLA")
+                os.makedirs(HomePath + "/XBLA") 
+                print("Files deleted. The program has finished running.")
+            else:
+                quit("The program has finished running.")
+                
 
         shutil.rmtree(source)
         shutil.rmtree(HomePath + UnpackedPath + FileName + FileName + FileName)
         shutil.rmtree(HomePath + UnpackedPath + FileName + FileName)
+        
         i = i + 1
+
+        
+       
