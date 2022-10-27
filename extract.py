@@ -1,7 +1,6 @@
 
-from ast import Str
+from pathlib import Path
 from fileinput import filename
-from logging import shutdown
 import os
 import os.path
 import shutil
@@ -11,10 +10,9 @@ import patoolib
 HomePath = os.path.expanduser('~')
 UnpackedPath = ('/XBLA_Unpacked/')
 FileName = ""
+
 # this sets FileName to the name of the file in /home/username/XBLA as a string and removes the [] and ''
 AllDirs = os.listdir(HomePath + '/XBLA/')
-
-
 
 for i in range(len(AllDirs)):
     FileName = AllDirs[i].replace('[', '').replace(']', '').replace("'", '')
@@ -32,44 +30,46 @@ for i in range(len(AllDirs)):
         print(MyDir, "Folder already exists.")
 # This extracts the rar in the XBLA folder to XBLA_Unpacked
     patoolib.extract_archive(HomePath + "/XBLA/" + (FileName),
-                             outdir=HomePath + "/XBLA_Unpacked/" + (FileName))
+                             outdir= HomePath + UnpackedPath + (FileName))
 
 # This changes the top level directory to removethe .rar from folder name
-    try:
-        DirectoryList = os.listdir(HomePath + UnpackedPath)
+    
+    DirectoryList = os.listdir(HomePath + UnpackedPath)
 
-        for filename in DirectoryList:
-            src = filename
-            filename = filename.replace('.rar', '')
-            dst = filename
-            path = HomePath + UnpackedPath
-            os.rename(os.path.join(path, src), os.path.join(path, dst))
-            FileName = dst
+    for filename in DirectoryList:
+        src = filename
+        filename = filename.replace('.rar', '')
+        dst = filename
+        path = HomePath + UnpackedPath
+        os.rename(os.path.join(path, src), os.path.join(path, dst))
+        FileName = dst
 # This grabs the new correct name and set FileName to that
-        FileName = (str(FileName).replace(
+    FileName = (str(FileName).replace(
             '[', '').replace(']', '').replace("'", ''))
 
 # This sets FileName to correct name with a / for the path and then grabs the next directory name
-        FileName = FileName + '/'
-        DirectoryList = os.listdir(HomePath + UnpackedPath + FileName + FileName)
-    except FileExistsError:
-       quit("The file " + FileName + " already exists. Please remove it and try again.")
+    FileName = FileName + '/'
+    LevelOne = Path(HomePath + UnpackedPath + FileName)
+    LevelTwo = Path(HomePath + UnpackedPath + FileName + FileName)
+    LevelThree = Path(HomePath + UnpackedPath + FileName + FileName + FileName)
+    LevelFour = Path(HomePath + UnpackedPath + FileName + FileName + FileName + FileName)
+    DirectoryList = os.listdir(LevelTwo)
+    
         
 # This changes the 2nd subdirectory to the correct name
     for filename in DirectoryList:
-        path = HomePath + UnpackedPath + FileName + FileName
+        path = LevelTwo
         src = filename
         dst = FileName[:-1]
         os.rename(os.path.join(path, src), os.path.join(path, dst))
 
 # This grabs the next directory name
-    DirectoryList = os.listdir(HomePath + UnpackedPath +
-                               FileName + FileName + FileName)
+    DirectoryList = os.listdir(LevelThree)
 
 
 # This changes the 3rd subdirectory to the correct name
     for filename in DirectoryList:
-        path = HomePath + UnpackedPath + FileName + FileName + FileName
+        path = LevelThree
         src = filename
         dst = FileName[:-1]
         os.rename(os.path.join(path, src), os.path.join(path, dst))
@@ -80,15 +80,15 @@ for i in range(len(AllDirs)):
 
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
-        path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
+        path = LevelFour
         filename = "default.xex"
         src = filename
         dst = FileName[:-1] + ".xex"
         os.rename(os.path.join(path, src), os.path.join(path, dst))
 
 # This gets rid of the extra folders by moving everything to the top level directory
-        source = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
-        destination = HomePath + UnpackedPath + FileName
+        source = LevelFour
+        destination = LevelOne
         AllFiles = os.listdir(source)
         for f in AllFiles:
             src = os.path.join(source, f)
@@ -105,8 +105,8 @@ for i in range(len(AllDirs)):
                 
 
         shutil.rmtree(source)
-        shutil.rmtree(HomePath + UnpackedPath + FileName + FileName + FileName)
-        shutil.rmtree(HomePath + UnpackedPath + FileName + FileName)
+        shutil.rmtree(LevelThree)
+        shutil.rmtree(LevelTwo)
         
         i = i + 1
 
