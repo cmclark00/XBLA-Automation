@@ -17,10 +17,13 @@
 
 ## Important note: When scraping in ES-DE make sure you use thegamesDB as your source, for some reason ScreenScraper doesn't seem towork well with these files.
 
-Instructions for use:
 
-Make sure you have the newest version of python installed.
-you can check this in the command line with python3 --version
+
+Prerequisites:
+Make sure you have a modern version of Python 3 installed, you can check this with python --version in the command line.
+Make sure you have some kind of unarchiving program that can handle Rar files.
+
+Instructions for use:
 
 In the comand line install patool using "pip install patool".
 
