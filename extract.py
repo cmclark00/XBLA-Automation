@@ -48,7 +48,6 @@ for i in range(len(AllDirs)):
                      FileName + FileName + FileName)
     DirectoryList = os.listdir(LevelTwo)
 
-
 # This changes the 2nd subdirectory to the correct name
     for filename in DirectoryList:
         path = LevelTwo
