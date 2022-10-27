@@ -1,25 +1,26 @@
 # XBLA-Automation 0.2b
 
 ## Purpose:
-# The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
+### The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
 
 ## Why it's necessary:
-# Due to the way that XBLA games are packaged ES-DE can't normally recognize the games as being in your Roms/xbox 360 folder. This is because XBLA games are packaged in a pirs file which is only used for the xbox 360, and which have no file extension, which ES-DE uses to recognize the game files. It is possible to do all of the work this script does by hand, it's just a little tedious. program
+### Due to the way that XBLA games are packaged ES-DE can't normally recognize the games as being in your Roms/xbox 360 folder. This is because XBLA games are packaged in a pirs file which is only used for the xbox 360, and which have no file extension, which ES-DE uses to recognize the game files. It is possible to do all of the work this program does by hand, it's just a little tedious.
 
-### How it works:
-The way the script works is by calling the patoolib module to extract the archives from the XBLA folder to the XBLA_Unpacked folder.
-At this point there is code in place to rename all of the subdirectories in the irectory created from the archive to match the main directory.
-After this happens the script will ask the user to hit enter to launch the wxPirs program with a message to select the pirs file in the innermost subdirectory, and
-to close the program after that file has been unpacked. The user must hit enter again AFTER they have closed wxPirs.
-Finally, the code will rename the default.xex file to the same name as the main directory and then do some subdirectory cleanup by moving all of the game files up a few levels into that main directory.
-At this point your terminal should be pointing back at your home directory and you should have nice organized game folders in XBLA_Unpacked.
-The final step is all on you, it's time to move all of the game folders over to your Roms/xbox 360 folder in your EmulationStation DE directory.
+## How it works:
+### The way the script works is by calling the patoolib module to extract the archives from the XBLA folder to the XBLA_Unpacked folder.
+### At this point there is code in place to rename all of the subdirectories in the directory created from the archive to match the main directory.
+### After this happens the script will ask the user to hit enter to launch the wxPirs program with a message to select the pirs file in the innermost subdirectory. 
+### Finally, the code will rename the default.xex file to the same name as the main directory and then do some subdirectory cleanup by moving all of the game files up a few levels into that main directory and deleting any unused and unnecessary subdirectories and files.
+### At this point the program will ask if you want it to delete the original Rar archives for you. If you enter "Y" the program will delete the archives and give a confirmation message and end, otherwise the program will give a termination message.
+### Now you should have a nice clean folder full of all of your XBLA games organized, named correctly, and without any unnecessary junk.
+### The final step is all on you, it's time to move all of the game folders over to your Roms/xbox 360 folder in your EmulationStation DE directory.
 
 ## Important note: When scraping in ES-DE make sure you use thegamesDB as your source, for some reason ScreenScraper doesn't seem towork well with these files.
 
 Instructions for use:
 
 Make sure you have the newest version of python installed.
+you can check this in the command line with python3 --version
 
 In the comand line install patool using "pip install patool".
 
@@ -27,22 +28,21 @@ Download the zipped project file and extract all of its contents to your home di
 In Windows this is usually C:\Users\username.
 In Linux this is usually /home/username.
 
-Delete the text files named delete me from both the XBLA and XBlA_Unpacked folders.
+Delete the text files named delete me from both the XBLA and XBLA_Unpacked folders.
 
 Place all of your archived XBLA games in the XBLA folder.
 If the archive name doesn't match the title of the game then fix that now.
 
-Open a command line in your home directory and run "python extract.py"
+Open a command line in your home directory and run "python3 extract.py"
 
 Keep an eye on the terminal, eventually it will ask you to hit enter to launch wxPirs.
 Select the innermost file in the game directory in XBLA_Unpacked by clicking the open button and navigating to it, then click the save/extract button.
-Once it is done extracting all of the files close wxPirs and then hit enter in the command line window.
-## Very important: Do not hit enter for the second time until after you have closed wxPirs. If wxPirs is still open when you hit enter for the second time the script will crash .
+Once it is done extracting all of the files close wxPirs and the program will move to the next Rar archive.
 
-Repeat the last step until you have gone through all of your archives. You will know the script has ended when it shows your home directory as the final location in the terminal.
+Repeat the last step until you have gone through all of your Rar archives.
 
 Now you can move all of the game folders over to your Roms/xbox 360 folder in your EmulationStation DE setup and run the scraper.
 
 ### If you need to run the script again make sure the XBLA_Unpacked folder is empty. If it isn't empty the script will crash.
 
-Special note for Linux users, you will have to use wine to run wxPirs. Once you set that up it should run fine.
+Special note for Linux users, you will have to use wine to run wxPirs. Linux is not currently supported because wxPirs does some weird things when ran through wine. I am working on it, but since Xenia doesn't officially support linux either at the moment it just isn't a priority.
