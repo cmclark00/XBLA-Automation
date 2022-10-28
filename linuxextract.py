@@ -5,6 +5,9 @@ import os
 import os.path
 from subprocess import run
 import patoolib
+
+# for dir remove
+import shutil
 # Changes ~ to /home/usernam
 HomePath = os.path.expanduser('~')
 UnpackedPath = ('/XBLA_Unpacked/')
@@ -30,13 +33,25 @@ for i in range(len(AllDirs)):
 # This changes the top level directory to removethe .rar from folder name
     DirectoryList = os.listdir(HomePath + UnpackedPath)
 
+# !!Warning: This sets FileName to the last folder in DirectoryList
+# If there are multiple folders, only the last one will be saved to FileName
     for filename in DirectoryList:
-        src = filename
-        filename = filename.replace('.rar', '')
-        dst = filename
+        # set parent path
         path = HomePath + UnpackedPath
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-        FileName = dst
+
+        # Set FileName var, as this will be valid in the end anyways
+        FileName = filename.replace('.rar', '')
+        
+        # set source and dest
+        src_folder = os.path.join(path, filename)
+        dst_folder = os.path.join(path, FileName)
+
+        # check if dest already exists, delete if it does
+        if os.path.isdir(dst_folder):
+            shutil.rmtree(dst_folder)
+
+        # move source to dest
+        os.rename(src_folder, dst_folder)
 # This grabs the new correct name and set FileName to that
     FileName = (str(FileName).replace(
         '[', '').replace(']', '').replace("'", ''))
