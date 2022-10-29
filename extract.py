@@ -102,5 +102,4 @@ for i in range(len(AllDirs)):
         shutil.rmtree(LevelThree)
         shutil.rmtree(LevelTwo)
 
-# This increments the loop by 1 to go through the next archive
-        i = i + 1
+
