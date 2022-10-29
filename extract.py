@@ -1,4 +1,5 @@
 
+from asyncio import subprocess
 from pathlib import Path
 from fileinput import filename
 import os
@@ -66,8 +67,12 @@ for i in range(len(AllDirs)):
 # This launches wxPirs and tells the user to run it on the correct file then close it
     input("Press Enter to launch wxPirs. Once launched, select the innermost file of " +
           FileName[:-1] + " and close wxPirs")
-    run("wxpirs.exe")
-
+    GetPirs = os.listdir(LevelFour)
+    GetPirs = (str(GetPirs).replace(
+        '[', '').replace(']', '').replace("'", ''))
+    
+    args = ["wxpirs.exe", (str(LevelFour) + ("\\") + (GetPirs))]
+    run(args,shell=True)
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
         path = LevelFour
