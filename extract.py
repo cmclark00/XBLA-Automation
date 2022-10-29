@@ -71,8 +71,8 @@ for i in range(len(AllDirs)):
     GetPirs = (str(GetPirs).replace(
         '[', '').replace(']', '').replace("'", ''))
     
-    args = ["wxpirs.exe", (str(LevelFour) + ("\\") + (GetPirs))]
-    run(args,shell=True)
+    Command = ["wxpirs.exe", (str(LevelFour) + ("\\") + (GetPirs))]
+    run(Command,shell=True)
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
         path = LevelFour
