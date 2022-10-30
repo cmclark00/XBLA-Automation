@@ -100,7 +100,7 @@ for i in range(len(AllDirs)):
 
     keyboard.press(Key.enter)
     keyboard.release(Key.enter)
-    sleep(20)
+    sleep(15)
     Popen.kill(RunWxpirs) 
     sleep(5)
     
