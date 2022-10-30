@@ -1,3 +1,4 @@
+
 from pathlib import Path
 from fileinput import filename
 import os
@@ -110,7 +111,7 @@ for i in range(len(AllDirs)):
         path = LevelFour
         filename = "default.xex"
         src = filename
-        dst = FileName.replace('_', ' ')[:-1] + ".xex"
+        dst = FileName[:-1] + ".xex"
         os.rename(os.path.join(path, src), os.path.join(path, dst))
 
 # This moves everything to the top level directory
@@ -141,9 +142,8 @@ for i in range(len(AllDirs)):
 
         DirectoryList = os.listdir(HomePath + UnpackedPath)
         for filename in DirectoryList:
-                path = HomePath + UnpackedPath
-                src = filename
-                dst = filename.replace('_', ' ')
-                os.rename(os.path.join(path, src), os.path.join(path, dst))
-        
-        
+            path = HomePath + UnpackedPath
+            src = filename
+            dst = filename.replace('_', ' ')
+            os.rename(os.path.join(path, src), os.path.join(path, dst)
+
