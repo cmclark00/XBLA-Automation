@@ -1,4 +1,4 @@
-# XBLA-Automation 0.5b
+# XBLA-Automation 0.6b
 
 ## Purpose:
 ### The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
@@ -22,6 +22,8 @@ Prerequisites:
 
 Make sure you have a modern version of Python 3 installed, you can check this with python --version in the command line.
 Make sure you have some kind of unarchiving program that can handle Rar files.
+Make sure the archive name is less than 250 characters. This is a limit made by wxPirs and i can't do anything about it.
+Make sure there are no random files in your archive. There shouldn'tn be any text files. If there are, delete them. The only file that should be in your archive is the PIRS file at the innermost subdirectory.
 
 Instructions for use:
 
