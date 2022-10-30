@@ -1,12 +1,15 @@
 
-from asyncio import subprocess
 from pathlib import Path
 from fileinput import filename
 import os
 import os.path
 import shutil
-from subprocess import run
+from subprocess import Popen
 import patoolib
+from pynput.keyboard import Key, Controller
+from time import sleep
+
+keyboard = Controller()
 
 # Changes ~ to /home/usernam
 HomePath = os.path.expanduser('~')
@@ -18,15 +21,16 @@ FileName = ""
 AllDirs = os.listdir(HomePath + PackedPath)
 for i in range(len(AllDirs)):
     FileName = AllDirs[i].replace('[', '').replace(']', '').replace("'", '')
-
+    
 # This creates the directory to unRar into
-    os.makedirs(str(HomePath + UnpackedPath + FileName))
+    os.makedirs(str(HomePath + UnpackedPath + FileName.replace(" ", "_")))
 
 # This extracts the rar in the XBLA folder to XBLA_Unpacked
     patoolib.extract_archive(HomePath + PackedPath + (FileName),
-                             outdir=HomePath + UnpackedPath + (FileName))
+                             outdir=HomePath + UnpackedPath + (FileName.replace(" ", "_")))
+    FileName = FileName.replace(" ", "_")
 
-# This changes the top level directory to removethe .rar from folder name
+# This changes the top level directory to remove the .rar from folder name
     DirectoryList = os.listdir(HomePath + UnpackedPath)
     for filename in DirectoryList:
         src = filename
@@ -38,18 +42,27 @@ for i in range(len(AllDirs)):
 
 # This grabs the new correct name and set FileName to that
     FileName = (str(FileName).replace(
-        '[', '').replace(']', '').replace("'", ''))
+        '[', '').replace(']', '').replace("'", '').replace(" ", "_"))
 
 # This sets FileName to correct name with a / for the path and then grabs the next directory name, while also creating the level structure for paths
-    FileName = FileName + '/'
+    FileName = FileName.replace(" ", "_") + '/'
     LevelOne = Path(HomePath + UnpackedPath + FileName)
     LevelTwo = Path(HomePath + UnpackedPath + FileName + FileName)
     LevelThree = Path(HomePath + UnpackedPath + FileName + FileName + FileName)
     LevelFour = Path(HomePath + UnpackedPath + FileName +
                      FileName + FileName + FileName)
-    DirectoryList = os.listdir(LevelTwo)
+    
+# This sets the 2nd directory to the correct name
+    DirectoryList = os.listdir(LevelOne)
+    for filename in DirectoryList:
+        src = filename
+        dst = FileName[:-1]
+        os.rename(os.path.join(path, src), os.path.join(path, dst))
+    
+    
 
 # This changes the 2nd subdirectory to the correct name
+    DirectoryList = os.listdir(LevelTwo)
     for filename in DirectoryList:
         path = LevelTwo
         src = filename
@@ -64,15 +77,34 @@ for i in range(len(AllDirs)):
         dst = FileName[:-1]
         os.rename(os.path.join(path, src), os.path.join(path, dst))
 
-# This launches wxPirs and tells the user to run it on the correct file then close it
-    input("Press Enter to launch wxPirs. Once launched, select the innermost file of " +
-          FileName[:-1] + " and close wxPirs")
+# This launches wxPirs , picks the correct file, then utomatically unpacks it to the correct location
+    
     GetPirs = os.listdir(LevelFour)
     GetPirs = (str(GetPirs).replace(
         '[', '').replace(']', '').replace("'", ''))
+    PirsPath = str(LevelFour) + ('\\') + str(GetPirs)
+    ProgramPath = HomePath + '/wxPirs.exe '
+    RunWxpirs = Popen((ProgramPath) + PirsPath)
+    sleep(5)
+    keyboard.press(Key.alt)
+    keyboard.release(Key.alt)
+
+    keyboard.press('f')
+    keyboard.release('f')
+
+    keyboard.press(Key.down)
+    keyboard.release(Key.down)
+
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
+
+    keyboard.press(Key.enter)
+    keyboard.release(Key.enter)
+    sleep(20)
+    Popen.kill(RunWxpirs) 
+    sleep(5)
     
-    Command = ["wxpirs.exe", (str(LevelFour) + ("\\") + (GetPirs))]
-    run(Command,shell=True)
+    
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
         path = LevelFour
