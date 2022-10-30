@@ -71,85 +71,89 @@ for i in range(len(AllDirs)):
 
 # This changes the 3rd subdirectory to the correct name
     DirectoryList = os.listdir(LevelThree)
+    CorrectDir = '000D0000'
     for filename in DirectoryList:
         path = LevelThree
-        src = filename
+        src = CorrectDir
         dst = FileName[:-1]
         os.rename(os.path.join(path, src), os.path.join(path, dst))
+                
+               
+            
 
 # This launches wxPirs , picks the correct file, then utomatically unpacks it to the correct location
     
-    GetPirs = os.listdir(LevelFour)
-    GetPirs = (str(GetPirs).replace(
-        '[', '').replace(']', '').replace("'", ''))
-    PirsPath = str(LevelFour) + ('\\') + str(GetPirs)
-    ProgramPath = HomePath + '/wxPirs.exe '
-    RunWxpirs = Popen((ProgramPath) + PirsPath)
-    sleep(3)
-    keyboard.press(Key.alt)
-    keyboard.release(Key.alt)
+        GetPirs = os.listdir(LevelFour)
+        GetPirs = (str(GetPirs).replace(
+            '[', '').replace(']', '').replace("'", ''))
+        PirsPath = str(LevelFour) + ('\\') + str(GetPirs)
+        ProgramPath = HomePath + '/wxPirs.exe '
+        RunWxpirs = Popen((ProgramPath) + PirsPath)
+        sleep(3)
+        keyboard.press(Key.alt)
+        keyboard.release(Key.alt)
 
-    keyboard.press('f')
-    keyboard.release('f')
+        keyboard.press('f')
+        keyboard.release('f')
 
-    keyboard.press(Key.down)
-    keyboard.release(Key.down)
+        keyboard.press(Key.down)
+        keyboard.release(Key.down)
 
-    keyboard.press(Key.enter)
-    keyboard.release(Key.enter)
+        keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
 
-    keyboard.press(Key.enter)
-    keyboard.release(Key.enter)
-    sleep(15)
-    Popen.kill(RunWxpirs) 
-    sleep(5)
-    
-    
-# This renames default.xex to the correct FileName.xex
-    for filename in DirectoryList:
-        path = LevelFour
-        filename = "default.xex"
-        src = filename
-        dst = FileName.replace('_', ' ')[:-1] + ".xex"
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-
-# This moves everything to the top level directory
-        source = LevelFour
-        destination = LevelOne
-        AllFiles = os.listdir(source)
-        for f in AllFiles:
-            src = os.path.join(source, f)
-            dst = os.path.join(destination, f)
-            os.rename(src, dst)
-
-# This changes the folder name back to game name with no underscores
-        DirectoryList = os.listdir(HomePath + UnpackedPath)
+        keyboard.press(Key.enter)
+        keyboard.release(Key.enter)
+        sleep(15)
+        Popen.kill(RunWxpirs) 
+        sleep(5)
+        
+        
+    # This renames default.xex to the correct FileName.xex
         for filename in DirectoryList:
-                    path = HomePath + UnpackedPath
-                    src = filename
-                    dst = filename.replace('_', ' ')
-                    os.rename(os.path.join(path, src), os.path.join(path, dst))
+            path = LevelFour
+            filename = "default.xex"
+            src = filename
+            dst = FileName.replace('_', ' ')[:-1]
+            os.rename(os.path.join(path, src), os.path.join(path, dst))
 
-# This deletes all of the extra subdirectories inside the game directories
-        LevelFour = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName + FileName
-        LevelThree = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName
-        LevelTwo = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName
-        source = LevelFour
-        shutil.rmtree(source)
-        shutil.rmtree(LevelThree)
-        shutil.rmtree(LevelTwo)
+    # This moves everything to the top level directory
+            source = LevelFour
+            destination = LevelOne
+            AllFiles = os.listdir(source)
+            for f in AllFiles:
+                src = os.path.join(source, f)
+                dst = os.path.join(destination, f)
+                os.rename(src, dst)
 
-# This asks the user if they want to delete the original Rar files and does so if they choose Y for yes
-        if i == len(AllDirs) - 1:
-            DeletePath = HomePath + PackedPath
-            Delete = input(
-                "Would you like the original Rar files to be deleted? Enter Y for yes, or N for no: ")
-            if Delete == "Y":
-                shutil.rmtree(HomePath + "/XBLA")
-                os.makedirs(HomePath + "/XBLA")
-                print("Files deleted. The program has finished running.")
-            else:
-                quit("The program has finished running.")
+    # This changes the folder name back to game name with no underscores
+            DirectoryList = os.listdir(HomePath + UnpackedPath)
+            for filename in DirectoryList:
+                        path = HomePath + UnpackedPath
+                        src = filename
+                        dst = filename.replace('_', ' ')
+                        os.rename(os.path.join(path, src), os.path.join(path, dst))
+
+    # This deletes all of the extra subdirectories inside the game directories
+            LevelFour = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName + FileName
+            LevelThree = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName
+            LevelTwo = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName
+            source = LevelFour
+            shutil.rmtree(source)
+            shutil.rmtree(LevelThree)
+            shutil.rmtree(LevelTwo)
+
+    # This asks the user if they want to delete the original Rar files and does so if they choose Y for yes
+            if i == len(AllDirs) - 1:
+                DeletePath = HomePath + PackedPath
+                Delete = input(
+                    "Would you like the original Rar files to be deleted? Enter Y for yes, or N for no: ")
+                if Delete == "Y":
+                    shutil.rmtree(HomePath + "/XBLA")
+                    os.makedirs(HomePath + "/XBLA")
+                    print("Files deleted. The program has finished running.")
+                else:
+                    quit("The program has finished running.")
 
 
 
