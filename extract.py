@@ -85,7 +85,7 @@ for i in range(len(AllDirs)):
     PirsPath = str(LevelFour) + ('\\') + str(GetPirs)
     ProgramPath = HomePath + '/wxPirs.exe '
     RunWxpirs = Popen((ProgramPath) + PirsPath)
-    sleep(5)
+    sleep(3)
     keyboard.press(Key.alt)
     keyboard.release(Key.alt)
 
@@ -121,6 +121,23 @@ for i in range(len(AllDirs)):
             src = os.path.join(source, f)
             dst = os.path.join(destination, f)
             os.rename(src, dst)
+            
+# This changes the folder name back to game name with no underscores
+        DirectoryList = os.listdir(HomePath + UnpackedPath)
+        for filename in DirectoryList:
+                    path = HomePath + UnpackedPath
+                    src = filename
+                    dst = filename.replace('_', ' ')
+                    os.rename(os.path.join(path, src), os.path.join(path, dst))
+
+# This deletes all of the extra subdirectories inside the game directories
+        LevelFour = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName + FileName
+        LevelThree = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName + FileName
+        LevelTwo = HomePath + UnpackedPath + FileName.replace('_', ' ') + FileName
+        source = LevelFour
+        shutil.rmtree(source)
+        shutil.rmtree(LevelThree)
+        shutil.rmtree(LevelTwo)
 
 # This asks the user if they want to delete the original Rar files and does so if they choose Y for yes
         if i == len(AllDirs) - 1:
@@ -134,16 +151,8 @@ for i in range(len(AllDirs)):
             else:
                 quit("The program has finished running.")
 
-# This deletes all of the extra subdirectories inside the game directories
-        shutil.rmtree(source)
-        shutil.rmtree(LevelThree)
-        shutil.rmtree(LevelTwo)
 
-        DirectoryList = os.listdir(HomePath + UnpackedPath)
-        for filename in DirectoryList:
-                path = HomePath + UnpackedPath
-                src = filename
-                dst = filename.replace('_', ' ')
-                os.rename(os.path.join(path, src), os.path.join(path, dst))
+
+            
         
         
