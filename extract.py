@@ -121,7 +121,7 @@ for i in range(len(AllDirs)):
             src = os.path.join(source, f)
             dst = os.path.join(destination, f)
             os.rename(src, dst)
-            
+
 # This changes the folder name back to game name with no underscores
         DirectoryList = os.listdir(HomePath + UnpackedPath)
         for filename in DirectoryList:
