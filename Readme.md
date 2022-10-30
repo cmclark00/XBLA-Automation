@@ -1,4 +1,4 @@
-# XBLA-Automation 0.2b
+# XBLA-Automation 0.5b
 
 ## Purpose:
 ### The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
@@ -19,6 +19,7 @@
 
 
 Prerequisites:
+
 Make sure you have a modern version of Python 3 installed, you can check this with python --version in the command line.
 Make sure you have some kind of unarchiving program that can handle Rar files.
 
