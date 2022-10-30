@@ -19,6 +19,7 @@
 
 
 Prerequisites:
+
 Make sure you have a modern version of Python 3 installed, you can check this with python --version in the command line.
 Make sure you have some kind of unarchiving program that can handle Rar files.
 
