@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  github:
+    image: github
+    build:
+      context: .
+      dockerfile: ./Dockerfile
