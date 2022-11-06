@@ -68,11 +68,11 @@ for i in range(len(AllDirs)):
           FileName[:-1] + " and close wxPirs")
     run(HomePath + "/wxPirs.exe")
     input("Press enter after you have used wxPirs on the innermost file of " +
-          FileName[:-1] + " and closed wxPirssrc = filename")
+          FileName[:-1] + " and closed wxPirs")
 
 # This renames default.xex to the correct FileName.xex
     for filename in DirectoryList:
-        path = HomePath + UnpackedPath + FileName + FileName + FileName + FileName
+        path = HomePath + UnpackedPath + FileName + FileName + FileName
         filename = FileName[:-1] + "\\default.xex"
         src = filename
         dst = FileName[:-1] + ".xex"
@@ -87,4 +87,3 @@ for i in range(len(AllDirs)):
             dst = os.path.join(destination, f)
             os.rename(src, dst)
 
-        i = i + 1
