@@ -1,5 +1,3 @@
-
-from ast import Str
 from fileinput import filename
 import os
 import os.path
