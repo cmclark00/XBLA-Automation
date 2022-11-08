@@ -87,14 +87,16 @@ for i in range(len(AllDirs)):
         GetPirs = (str(GetPirs).replace(
             '[', '').replace(']', '').replace("'", ''))
         PirsPath = str(LevelFour) + "/" + str(GetPirs)
-        RunWxpirs = Popen({'wine', 'wxPirs.exe', PirsPath})
-        sleep(3)
-        keyboard.press(Key.alt)
-        keyboard.release(Key.alt)
+        RunWxpirs = Popen({'wine', HomePath + '/wxPirs.exe', PirsPath})
+        sleep(15)
+        
+        keyboard.pressed(Key.alt)
+        
 
         keyboard.press('f')
         keyboard.release('f')
-
+        keyboard.release(Key.alt)
+        
         keyboard.press(Key.down)
         keyboard.release(Key.down)
 
