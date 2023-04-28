@@ -1,118 +1,53 @@
-from pathlib import Path
 import os
-import os.path
-import shutil
 import patoolib
+import shutil
 
-# Changes ~ to /home/username
-HomePath = os.path.expanduser('~')
-UnpackedPath = os.path.join('', 'XBLA_Unpacked')
-PackedPath = os.path.join('', 'XBLA')
-FileName = ""
+# Get the user's home directory
+home_dir = os.path.expanduser("~")
 
-# This gets all of the archives from XBLA and sets FileName to the name of the file in /home/username/XBLA/ as a string and removes the [] and ''
-AllDirs = os.listdir(os.path.join(HomePath, PackedPath))
-for i in range(len(AllDirs)):
-    FileName = AllDirs[i].replace('[', '').replace(']', '').replace("'", '')
-    
-    # This creates the directory to unRar into
-    os.makedirs(os.path.join(HomePath, UnpackedPath, FileName.replace(" ", "_")))
+# Get the path to the XBLA folder
+xbla_dir = os.path.join(home_dir, "XBLA")
 
-    # This extracts the rar in the XBLA folder to XBLA_Unpacked
-    patoolib.extract_archive(os.path.join(HomePath, PackedPath, FileName),
-                                outdir=os.path.join(HomePath, UnpackedPath, FileName.replace(" ", "_")))
-    
-    # This changes the top level directory to remove the .rar from folder name
-    DirectoryList = os.listdir(os.path.join(HomePath, UnpackedPath))
-    for filename in DirectoryList:
-        src = filename
-        filename = filename.replace('.rar', '')
-        dst = filename
-        path = os.path.join(HomePath, UnpackedPath)
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-        FileName = dst
+# Get the path to the XBLA_Unpacked folder
+xbla_unpacked_dir = os.path.join(home_dir, "XBLA_Unpacked")
 
-    # This grabs the new correct name and set FileName to that
-    FileName = (str(FileName).replace(
-        '[', '').replace(']', '').replace("'", '').replace(" ", "_"))
+# Create the XBLA_Unpacked folder if it doesn't exist
+if not os.path.exists(xbla_unpacked_dir):
+    os.mkdir(xbla_unpacked_dir)
 
-    # This sets FileName to correct name with a / for the path and then grabs the next directory name, while also creating the level structure for paths
-    FileName = FileName.replace(" ", "_") + os.sep
-    LevelOne = Path(os.path.join(HomePath, UnpackedPath, FileName))
-    LevelTwo = Path(os.path.join(HomePath, UnpackedPath, FileName, FileName))
-    LevelThree = Path(os.path.join(HomePath, UnpackedPath, FileName, FileName, FileName))
-    LevelFour = Path(os.path.join(HomePath, UnpackedPath, FileName, FileName, FileName, FileName))
+# Iterate over all of the RAR archives in the XBLA folder
+for archive in os.listdir(xbla_dir):
+    if archive.endswith(".rar"):
+        if not os.path.exists(os.path.join(xbla_unpacked_dir, archive[:-4].replace(" ", "_"))):
+            os.mkdir(os.path.join(xbla_unpacked_dir, archive[:-4].replace(" ", "_")))
 
-    # This sets the 2nd directory to the correct name
-    DirectoryList = os.listdir(LevelOne)
-    for filename in DirectoryList:
-        path = LevelOne
-        src = filename
-        dst = FileName[:-1]
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
+        # Unpack the archive to the XBLA_Unpacked folder
+        patoolib.extract_archive(os.path.join(xbla_dir, archive),
+                                 outdir = (os.path.join(xbla_unpacked_dir, archive[:-4].replace(" ", "_"))))
 
-    # This changes the 2nd subdirectory to the correct name
-    DirectoryList = os.listdir(LevelTwo)
-    for filename in DirectoryList:
-        path = LevelTwo
-        src = filename
-        dst = FileName[:-1]
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-
-    # This changes the 3rd subdirectory to the correct name
-    DirectoryList = os.listdir(LevelThree)
-    CorrectDir = '000D0000'
-    for filename in DirectoryList:
-        path = LevelThree
-        src = CorrectDir
-        dst = FileName[:-1]
-        os.rename(os.path.join(path, src), os.path.join(path, dst))
-
-    # This renames the pirs file to correct filename
-    for filename in DirectoryList:
-        path = LevelFour
-        for root, dirs, files in os.walk(path):
+        # Get the path to the innermost subdirectory
+        for subdir, dirs, files in os.walk(xbla_unpacked_dir):
             for file in files:
-        # Get the full path to the file
-                file_path = os.path.join(root, file)
-                filename = os.path.basename(file_path)
-                src = filename
-                dst = FileName.replace('_', ' ')[:-1] + (".pirs")
-                FileName = os.rename(os.path.join(path, src), os.path.join(path, dst))
+    # Get the path to the innermost file in each subdirectory
+                innermost_file = os.path.join(subdir, file)
+        
 
-    # This moves everything to the top level directory
-    source = LevelFour
-    destination = os.path.join(HomePath, UnpackedPath)
-    AllFiles = os.listdir(source)
-    for f in AllFiles:
-        src = os.path.join(source, f)
-        dst = os.path.join(destination, f)
-        os.rename(src, dst)
+        # Get the name of the extensionless file in the innermost subdirectory
+        extensionless_file = innermost_file
 
-    # This erases the original folder
-    DeleteFiles = os.listdir(LevelOne)
-    for f in DeleteFiles:
-        shutil.rmtree(LevelOne)
+        # Rename the extensionless file to match the name of the archive it came from
+        os.rename(os.path.join(extensionless_file), os.path.join(xbla_unpacked_dir, archive.replace(".rar", ".pirs")))
 
-    # This removes the pirs extension
-    source = os.listdir(os.path.join(HomePath, UnpackedPath))
-    for filename in source:
-        path = os.path.join(HomePath, UnpackedPath)
-        for root, dirs, files in os.walk(path):
+        # Delete the innermost directory
+        shutil.rmtree(os.path.join(xbla_unpacked_dir, archive[:-4].replace(" ", "_")))
+        
+        #Remove the .pirs extension
+        for subdir, dirs, files in os.walk(xbla_unpacked_dir):
             for file in files:
-        # Get the full path to the file
-                file_path = os.path.join(root, file)        
-                src = file_path
-                dst = file_path.replace('.pirs','')
-                os.rename(src, dst)
-    
-# This asks the user if they want to delete the original Rar files and does so if they choose Y for yes
-if i == len(AllDirs) - 1:
-    DeletePath = HomePath + PackedPath
-    Delete = input("Would you like the original Rar files to be deleted? Enter Y for yes, or N for no: ")
-    if Delete == "Y" or Delete == "y":
-        shutil.rmtree(HomePath + "/XBLA")
-        os.makedirs(HomePath + "/XBLA")
-        print("Files deleted. The program has finished running.")
-    else:
-        quit("The program has finished running.")
+                src = file
+                dst = file.replace(".pirs", " ")
+                os.rename(os.path.join(xbla_unpacked_dir, src), (os.path.join(xbla_unpacked_dir, dst)))
+            
+
+# Print a message to let the user know that the operation was successful
+print("Unpacking complete!")
