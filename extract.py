@@ -45,7 +45,7 @@ for archive in os.listdir(xbla_dir):
         for subdir, dirs, files in os.walk(xbla_unpacked_dir):
             for file in files:
                 src = file
-                dst = file.replace(".pirs", " ")
+                dst = file.replace(".pirs", "")
                 os.rename(os.path.join(xbla_unpacked_dir, src), (os.path.join(xbla_unpacked_dir, dst)))
             
 
