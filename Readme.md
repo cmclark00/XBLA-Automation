@@ -17,11 +17,10 @@ Prerequisites:
 
 Make sure you have a modern version of Python 3 installed, you can check this with python --version in the command line.
 Make sure you have some kind of unarchiving program that can handle Rar files.
-Make sure there are no random files in your archive. There shouldn't be any text files. If there are, delete them. The only file that should be in your archive is the PIRS file at the innermost subdirectory.
 
 Instructions for use:
 
-In the comand line install patool using "pip install patool".
+In the command line install patool using "pip install patool".
 
 Download the zipped project file and extract all of its contents to your home directory.
 In Windows this is usually C:\Users\username.
