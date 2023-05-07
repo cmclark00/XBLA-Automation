@@ -3,15 +3,19 @@ import patoolib
 import shutil
 from alive_progress import alive_bar
 import time
+from tkinter import Tk
+from tkinter.filedialog import askdirectory
 
 # Get the user's home directory
 home_dir = os.path.expanduser("~")
 
 # Get the path to the XBLA folder
-xbla_dir = os.path.join(home_dir, "XBLA")
+print("Please choose your input folder: ")
+xbla_dir = askdirectory()
 
 # Get the path to the XBLA_Unpacked folder
-xbla_unpacked_dir = os.path.join(home_dir, "XBLA_Unpacked")
+print("Please choose your output folder: ")
+xbla_unpacked_dir = askdirectory()
 
 # Create the XBLA_Unpacked folder if it doesn't exist
 if not os.path.exists(xbla_unpacked_dir):
