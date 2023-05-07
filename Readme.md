@@ -1,4 +1,4 @@
-# XBLA-Automation 1.1
+# XBLA-Automation 1.2
 
 ## Purpose:
 ### The purpose of this script is to extract, move, and organize all of your XBLA game archives for easy integration into EmulationStation Desktop Edition
