@@ -12,12 +12,8 @@ home_dir = os.path.expanduser("~")
 # Get the path to the XBLA folder
 print("Please choose your input folder: ")
 xbla_dir = askdirectory()
-print("Please choose your input folder: ")
-xbla_dir = askdirectory()
 
 # Get the path to the XBLA_Unpacked folder
-print("Please choose your output folder: ")
-xbla_unpacked_dir = askdirectory()
 print("Please choose your output folder: ")
 xbla_unpacked_dir = askdirectory()
 
@@ -36,15 +32,14 @@ with alive_bar(len(os.listdir(xbla_dir))) as bar:
             patoolib.extract_archive(os.path.join(xbla_dir, archive),
                                         outdir = os.path.join(xbla_unpacked_dir, archive[:-4].replace(" ", "_")), verbosity=-1)
 
-        # Get the path to the innermost subdirectory
-        for subdir, dirs, files in os.walk(xbla_unpacked_dir):
-            for file in files:
-    # Get the path to the innermost file in each subdirectory
-                innermost_file = os.path.join(subdir, file)
+            # Get the path to the innermost subdirectory
+            for subdir, dirs, files in os.walk(xbla_unpacked_dir):
+                for file in files:
+            # Get the path to the innermost file in each subdirectory
+                    innermost_file = os.path.join(subdir, file)
         
-
-        # Get the name of the extensionless file in the innermost subdirectory
-        extensionless_file = innermost_file
+            # Get the name of the extensionless file in the innermost subdirectory
+            extensionless_file = innermost_file
 
             # Rename the extensionless file to match the name of the archive it came from
             os.rename(os.path.join(extensionless_file), os.path.join(xbla_unpacked_dir, archive.replace(".rar", ".pirs")))
@@ -67,9 +62,9 @@ print("Unpacking complete!")
 # Ask if the user wants to delete the .rar archives
 deleteRar = ""
 while deleteRar != "Y" and deleteRar != "y" and deleteRar != "N" and deleteRar != "n":
-    deleteRar = input("Would you like to delete the .rar folder and the .rar archives inside it? Enter Y or N: ")
+    deleteRar = input("Would you like to delete the XBLA folder and the .rar archives inside it? Enter Y or N: ")
     if deleteRar == "Y" or deleteRar == "y":
         shutil.rmtree(xbla_dir)
-        print(".rar folder has been deleted.")
+        print("XBLA folder has been deleted.")
     else:
         quit
