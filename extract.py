@@ -5,10 +5,6 @@ from alive_progress import alive_bar
 import time
 from tkinter import Tk
 from tkinter.filedialog import askdirectory
-from alive_progress import alive_bar
-import time
-from tkinter import Tk
-from tkinter.filedialog import askdirectory
 
 # Get the user's home directory
 home_dir = os.path.expanduser("~")
