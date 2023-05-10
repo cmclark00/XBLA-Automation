@@ -62,9 +62,9 @@ print("Unpacking complete!")
 # Ask if the user wants to delete the .rar archives
 deleteRar = ""
 while deleteRar != "Y" and deleteRar != "y" and deleteRar != "N" and deleteRar != "n":
-    deleteRar = input("Would you like to delete the XBLA folder and the .rar archives inside it? Enter Y or N: ")
+    deleteRar = input("Would you like to delete the .rar folder and the .rar archives inside it? Enter Y or N: ")
     if deleteRar == "Y" or deleteRar == "y":
         shutil.rmtree(xbla_dir)
-        print("XBLA folder has been deleted.")
+        print(".rar folder has been deleted.")
     else:
         quit
