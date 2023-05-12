@@ -20,14 +20,14 @@ Make sure you have some kind of unarchiving program that can handle Rar files.
 
 Instructions for use:
 
-In the command line install patool using "pip install patool", and .then install alive_progress with "pip install alive_progress".
+In the command line install patool using "pip install patool", and .then install alive_progress with "pip install alive_progress". If you want to use the GUI based version also install PySimpleGui using "pip install pysimplegui".
 
 Download the zipped project file and extract all of its contents.
 
 Place all of your archived XBLA games in one folder, I recommend naming it XBLA.
 If the archive name doesn't match the title of the game then fix that now.
 
-Open a command line wherever you extracted the project file to and run "python3 extract.py"
+Open a command line wherever you extracted the project file to and run "python3 extract.py". Alternatively, run "python3 extractGUI.py" for the GUI version.
 The program is now fully automated so you can just sit back and watch it work!
 
 
