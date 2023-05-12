@@ -17,10 +17,6 @@ xbla_dir = askdirectory()
 print("Please choose your output folder: ")
 xbla_unpacked_dir = askdirectory()
 
-# Create the XBLA_Unpacked folder if it doesn't exist
-if not os.path.exists(xbla_unpacked_dir):
-    os.mkdir(xbla_unpacked_dir)
-
 # Iterate over all of the RAR archives in the XBLA folder
 with alive_bar(len(os.listdir(xbla_dir))) as bar:
     for archive in os.listdir(xbla_dir):
