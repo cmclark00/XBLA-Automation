@@ -40,22 +40,18 @@ def unpack_xbla(xbla_dir, xbla_unpacked_dir):
                 
             print(file)
 
-
-
 layout = [
     [sg.Text("XBLA Unpacker")],
     [sg.Text("Input Folder")],
     [sg.InputText(key = "Input Folder"), sg.FolderBrowse()],
     [sg.Text("Output Folder")],
     [sg.InputText(key = "Output Folder"), sg.FolderBrowse()],
-    [sg.Button("Unpack"), sg.Button("Quit")],
-    [sg.ProgressBar(100, orientation="horizontal", size=(20, 20)), sg.Button("Unpack"), sg.Button("Quit")]
+    [sg.ProgressBar(100, orientation="horizontal", size=(20, 20)), sg.Button("Unpack"), sg.CloseButton("Quit")]
 ]
 
 finished = [
     [sg.Text("The Program Has Finished.")]
 ]
-
 
 win = sg.Window("XBLA Unpacker", layout)
 
@@ -66,7 +62,6 @@ while True:
     if event == "Unpack":
         # Unpack the XBLA files
         unpack_xbla(values["Input Folder"], values["Output Folder"])
-        break
 
 win.close()
-
+print("The program has finished.")
