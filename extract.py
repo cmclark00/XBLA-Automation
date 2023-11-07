@@ -47,7 +47,7 @@ with alive_bar(len(os.listdir(xbla_dir))) as bar:
             for subdir, dirs, files in os.walk(xbla_unpacked_dir):
                 for file in files:
                     src = file
-                    dst = file.replace(".pirs", "")
+                    dst = file.replace(".pirs", " (XBLA)")
                     os.rename(os.path.join(xbla_unpacked_dir, src), (os.path.join(xbla_unpacked_dir, dst)))
             
         print(file)
