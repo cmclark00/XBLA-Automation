@@ -35,7 +35,7 @@ def unpack_xbla(xbla_dir, xbla_unpacked_dir):
                 for subdir, dirs, files in os.walk(xbla_unpacked_dir):
                     for file in files:
                         src = file
-                        dst = file.replace(".pirs", "")
+                        dst = file.replace(".pirs", " (XBLA)")
                         os.rename(os.path.join(xbla_unpacked_dir, src), (os.path.join(xbla_unpacked_dir, dst)))
                 
             print(file)

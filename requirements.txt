@@ -1,0 +1,3 @@
+patool
+alive-progress
+PySimpleGui

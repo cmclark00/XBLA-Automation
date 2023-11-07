@@ -20,7 +20,7 @@ Make sure you have some kind of unarchiving program that can handle Rar files.
 
 Instructions for use:
 
-In the command line install patool using "pip install patool", and .then install alive_progress with "pip install alive_progress". If you want to use the GUI based version also install PySimpleGui using "pip install pysimplegui".
+In the command line install the required python modules using "pip install -r requirements.txt".
 
 Download the zipped project file and extract all of its contents.
 
